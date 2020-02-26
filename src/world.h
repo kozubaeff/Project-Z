@@ -1,11 +1,8 @@
 #include <memory>
 #include <vector>
 
-class Object {
-};
-
-class Subject {
-};
+#include "object.h"
+#include "subject.h"
 
 class World {
 public:
