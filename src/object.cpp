@@ -1,12 +1,13 @@
 #include "object.h"
 
-using namespace std;
-
-pair<int, int> Tree::getPosition() const {
-	return make_pair(x, y);
+float Object::getX() const {
+        return x;
 }
 
-int Tree::getHP() const {
-	return hp;
+float Object::getY() const {
+        return y;
 }
 
+int Object::getHP() const {
+        return hp;
+}
