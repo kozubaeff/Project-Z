@@ -1,3 +1,5 @@
+#pragma once
+
 #include "world.h"
 
 class WorldUI : public World {
