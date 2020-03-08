@@ -1,13 +1,13 @@
 #include "object.h"
 
 float Object::getX() const {
-        return x;
+    return x;
 }
 
 float Object::getY() const {
-        return y;
+    return y;
 }
 
 int Object::getHP() const {
-        return hp;
+    return hp;
 }
