@@ -1,8 +1,10 @@
+#include <SFML/Graphics.hpp>
+
 #include "objectui.h"
 
 using namespace std;
 
-ObjectUI::ObjectUI(unique_ptr<Object> rhs)
+ObjectUI::ObjectUI(unique_ptr<Object> rhs, sf::String file)
 	: obj(move(rhs))
 {}
 
