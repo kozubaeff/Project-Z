@@ -1,26 +1,22 @@
 #pragma once
-
+#include <SFML/Graphics.hpp>
 #include <utility>
+
+enum class Sprites {
+    Tree,
+    Stone
+};
 
 class Object {
 public:
+	Object(float _x, float _y, int h, bool damag, Sprites spr);
 	virtual ~Object() = default;
-	virtual float getX() const;
-	virtual float getY() const;
-	virtual int getHP() const = 0;
+	float getX() const;
+	float getY() const;
+	int getHP() const;
+	Sprites sprite_type;
 private:
 	float x, y;
 	int hp;
+	bool damagable;
 };
-
-class Tree : public Object {
-public:
-	float getX() const override;
-	float getY() const override;
-	int getHP() const override;
-private:
-	int x = 239;
-	int y = 17;
-	int hp = 10;
-};
-
