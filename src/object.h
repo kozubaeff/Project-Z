@@ -9,11 +9,13 @@ enum class Sprites {
 
 class Object {
 public:
+	Object();
 	Object(float _x, float _y, int h, bool damag, Sprites spr);
 	virtual ~Object() = default;
 	float getX() const;
 	float getY() const;
 	int getHP() const;
+protected:
 	Sprites sprite_type;
 private:
 	float x, y;

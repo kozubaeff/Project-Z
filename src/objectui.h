@@ -7,11 +7,13 @@
 
 class ObjectUI : public Object {
 public:
-	ObjectUI(std::unique_ptr<Object> obj, sf::String file);
+	ObjectUI(std::unique_ptr<Object> obj);
 
-	uint8_t getSpriteID() const;
+	Sprites getSprite() const;
+
+	void drawSprite(sf::RenderWindow &window);
 
 private:
 	std::unique_ptr<Object> obj;
-	uint8_t spriteID = 239;
+	Sprites sprite;
 };
