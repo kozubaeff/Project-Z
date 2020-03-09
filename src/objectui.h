@@ -17,6 +17,6 @@ public:
 
 private:
 	std::unique_ptr<Object> obj;
-	Sprites type;
+	ObjectSprites type;
 	sf::Sprite sprite;
 };

@@ -2,11 +2,12 @@
 
 const int MAP_HEIGHT = 100;
 const int MAP_WIDTH = 100;
+
 class Map {
 public:
-sf::Image map_image;
-sf::Texture map;
-sf::Sprite s_map;
+    sf::Image map_image;
+    sf::Texture map;
+    sf::Sprite s_map;
 void load() {
     map_image.loadFromFile("images/map.png");
     map.loadFromImage(map_image);
@@ -125,6 +126,5 @@ void draw_map(sf::RenderWindow &window){
 			s_map.setPosition(j * 32, i * 32);
 			window.draw(s_map);
 		}
-}
-
+    }
 };

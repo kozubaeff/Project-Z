@@ -1,8 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <utility>
 
-enum class Sprites {
+enum class ObjectSprites {
     Tree,
     Stone
 };
@@ -10,13 +9,13 @@ enum class Sprites {
 class Object {
 public:
 	Object();
-	Object(float _x, float _y, int h, bool damag, Sprites spr);
+	Object(float _x, float _y, int h, bool damag, ObjectSprites spr);
 	virtual ~Object() = default;
 	float getX() const;
 	float getY() const;
 	int getHP() const;
 protected:
-	Sprites sprite_type;
+	ObjectSprites sprite_type;
 private:
 	float x, y;
 	int hp;
