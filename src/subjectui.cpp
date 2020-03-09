@@ -34,22 +34,21 @@ void SubjectUI::drawSprite(sf::RenderWindow &window) {
 	window.draw(sprite);
 }
 
-void SubjectUI::update(float time, sf::RenderWindow &window) 
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-			sprite.move(-1.0 * time, 0);
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) {
-			sprite.move(1.0 * time, 0);
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			sprite.move(0, -1.0 * time);
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			sprite.move(0, 1.0 * time);
-		}
-		window.draw(sprite);
+void SubjectUI::update(float time, sf::RenderWindow &window) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		sprite.move(-1.0 * time, 0);
 	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		sprite.move(1.0 * time, 0);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		sprite.move(0, -1.0 * time);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		sprite.move(0, 1.0 * time);
+	}
+	window.draw(sprite);
+}
