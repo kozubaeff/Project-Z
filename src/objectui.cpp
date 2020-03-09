@@ -7,22 +7,34 @@ using namespace std;
 
 ObjectUI::ObjectUI(unique_ptr<Object> rhs)
 	: obj(move(rhs))
-	, sprite(sprite_type)
-{}
+	, type(sprite_type)
+{
+	loadSprite();
+}
 
-Sprites ObjectUI::getSprite() const {
+void ObjectUI::loadSprite() {
+	sf::Image image;
+	switch (type) {
+		case Sprites::Tree:
+			image.loadFromFile("images/tree");
+		case Sprites::Stone:
+			image.loadFromFile("images/stone");
+	}
+	sf::Texture texture;
+	texture.loadFromImage(image);
+	sprite.setTexture(texture);
+	switch (type) {
+		case Sprites::Tree:
+			sprite.setTextureRect(sf::IntRect(0, 0, 50, 82));
+		case Sprites::Stone:
+			sprite.setTextureRect(sf::IntRect(0, 0, 30, 30)); //TODO
+	}
+}
+
+sf::Sprite ObjectUI::getSprite() const {
 	return sprite;
 }
 
-void ObjectUI::drawSprite(sf::RenderWindow&window) {
-	if (sprite == Sprites::Tree) {
-		sf::Image image;
-		image.loadFromFile("images/tree");
-		sf::Texture texture;
-		texture.loadFromImage(image);
-		sf::Sprite sprite;
-		sprite.setTexture(texture);
-		sprite.setTextureRect(sf::IntRect(0, 0, 50, 82));
-		window.draw(sprite);
-	}
+void ObjectUI::drawSprite(sf::RenderWindow &window) {
+	window.draw(sprite);
 }
