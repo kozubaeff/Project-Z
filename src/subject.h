@@ -2,7 +2,10 @@
 
 class Subject {
 public:
-	Subject(float x, float y, int hp);
+	Subject(float _x, float _y, int h);
+	float getX();
+	float getY();
+	int getHP();
 	virtual ~Subject() = default;
 private:
 	float x, y;
