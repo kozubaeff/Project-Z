@@ -16,9 +16,9 @@ void ObjectUI::loadSprite() {
 	sf::Image image;
 	switch (type) {
 		case Sprites::Tree:
-			image.loadFromFile("images/tree");
+			image.loadFromFile("images/tree.png");
 		case Sprites::Stone:
-			image.loadFromFile("images/stone");
+			image.loadFromFile("images/stone.png");
 	}
 	sf::Texture texture;
 	texture.loadFromImage(image);
