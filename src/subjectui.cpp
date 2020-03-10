@@ -31,6 +31,7 @@ sf::Sprite SubjectUI::getSprite() const {
 }
 
 void SubjectUI::drawSprite(sf::RenderWindow &window) {
+	sprite.setPosition(sub->getX(), sub->getY());
 	window.draw(sprite);
 }
 

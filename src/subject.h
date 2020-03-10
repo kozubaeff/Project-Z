@@ -9,7 +9,7 @@ enum class SubjectSprites {
 class Subject {
 public:
 	Subject();
-	Subject(float _x, float _y, int h);
+	Subject(float _x, float _y, int h, SubjectSprites type);
 	float getX();
 	float getY();
 	int getHP();

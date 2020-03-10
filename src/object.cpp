@@ -1,6 +1,6 @@
 #include "object.h"
 
-Object::Object(float _x, float _y, int h, bool damag, Sprites spr){
+Object::Object(float _x, float _y, int h, bool damag, ObjectSprites spr){
     x = _x;
     y = _y;
     hp = h;
