@@ -1,21 +1,19 @@
-#include "object.h"
+#include "object.hpp"
 
-Object::Object(float _x, float _y, int h, bool damag, ObjectSprites spr){
-    x = _x;
-    y = _y;
-    hp = h;
-    damagable = damag;
-    sprite_type = spr;
+#include <SFML/Graphics/RenderTarget.hpp>
+
+
+Object::Object(const sf::Texture& texture)
+	: mSprite(texture)
+{
 }
 
-float Object::getX() const {
-    return x;
+Object::Object(const sf::Texture& texture, const sf::IntRect& textureRect)
+	: mSprite(texture, textureRect)
+{
 }
 
-float Object::getY() const {
-    return y;
-}
-
-int Object::getHP() const {
-    return hp;
+void Object::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	target.draw(mSprite, states);
 }

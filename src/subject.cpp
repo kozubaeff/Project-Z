@@ -1,20 +1,23 @@
-#include "subject.h"
+#include "subject.hpp"
 
-Subject::Subject(float _x, float _y, int h, SubjectSprites sprite)
-    : x(_x)
-    , y(_y)
-    , hp(h)
-    , sprite_type(sprite)
-{}
 
-float Subject::getX() {
-    return x;
+void Subject::setVelocity(sf::Vector2f velocity)
+{
+	mVelocity = velocity;
 }
 
-float Subject::getY(){
-    return y;
+void Subject::setVelocity(float vx, float vy)
+{
+	mVelocity.x = vx;
+	mVelocity.y = vy;
 }
 
-int Subject::getHP() {
-    return hp;
+sf::Vector2f Subject::getVelocity() const
+{
+	return mVelocity;
+}
+
+void Subject::updateCurrent(sf::Time dt)
+{
+	move(mVelocity * dt.asSeconds());
 }
