@@ -1,4 +1,4 @@
-#include "hero.hpp"
+#include "Hero.hpp"
 #include "ResourceHolder.hpp"
 
 #include <SFML/Graphics/RenderTarget.hpp>
