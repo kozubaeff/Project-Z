@@ -24,23 +24,24 @@ World::World(sf::RenderWindow& window)
 
 void World::update(sf::Time dt)
 {
-	// Scroll the world
-	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
-	//TO-DO USE HANDLE INPUT
-	//FOR NOW JUST GO SIDEWAYS
-	// Move the player sidewards 
+	// Scroll the world when Player left the rectangle 400 on 320 px
+	// Move the player
 	sf::Vector2f position = mPlayer->getPosition();
 	sf::Vector2f velocity = mPlayer->getVelocity();
+	float movePlayerOnX = velocity.x * dt.asSeconds();
+	float movePlayerOnY = velocity.y * dt.asSeconds();
 
-	// If player touches borders, flip its X velocity
-	/*
-	if (position.x <= mWorldBounds.left + 150.f
-		|| position.x >= mWorldBounds.left + mWorldBounds.width - 150.f)
+	if (position.x + movePlayerOnX > mWorldBounds.left + mWorldBounds.width * 3 / 4 || 
+		position.x + movePlayerOnX < mWorldBounds.left + mWorldBounds.width / 4     ||
+		position.y + movePlayerOnY > mWorldBounds.top + mWorldBounds.height * 3 / 4 ||
+		position.y + movePlayerOnY < mWorldBounds.top + mWorldBounds.height / 4) 
 	{
-		velocity.x = -velocity.x;
-		mPlayer->setVelocity(velocity);
+		mWorldView.move(velocity * dt.asSeconds());
+		mWindow.setView(mWorldView);
+		mWorldBounds.left += velocity.x * dt.asSeconds();
+		mWorldBounds.top += velocity.y * dt.asSeconds();
 	}
-	*/
+
 	// Apply movements
 	mSceneGraph.update(dt);
 }
@@ -50,7 +51,6 @@ void World::draw()
 	Map map;
 	map.load();
 	map.draw_map(mWindow);
-	mWindow.setView(mWorldView);
 	mWindow.draw(mSceneGraph);
 }
 

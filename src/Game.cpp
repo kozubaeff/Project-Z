@@ -67,7 +67,6 @@ void Game::render()
 	mWindow.clear();
 	mWorld.draw();
 
-	mWindow.setView(mWindow.getDefaultView());
 	mWindow.display();
 }
 
