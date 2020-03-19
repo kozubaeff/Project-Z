@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include "map.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -9,7 +10,7 @@ World::World(sf::RenderWindow& window)
 	, mTextures()
 	, mSceneGraph()
 	, mSceneLayers()
-	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 2000.f)
+	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, mWorldView.getSize().y)
 	, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
 	, mScrollSpeed(-50.f)
 	, mPlayer(nullptr)
@@ -46,15 +47,18 @@ void World::update(sf::Time dt)
 
 void World::draw()
 {
+	Map map;
+	map.load();
+	map.draw_map(mWindow);
 	mWindow.setView(mWorldView);
 	mWindow.draw(mSceneGraph);
 }
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::Swordsman, "images/player.png");
-	mTextures.load(Textures::Mage, "images/player.png");
-	mTextures.load(Textures::Archer, "images/player.png");
+	mTextures.load(Textures::Swordsman, "player.png");
+	mTextures.load(Textures::Mage, "player.png");
+	mTextures.load(Textures::Archer, "player.png");
 }
 
 void World::buildScene()
