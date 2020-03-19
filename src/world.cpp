@@ -24,7 +24,7 @@ World::World(sf::RenderWindow& window)
 void World::update(sf::Time dt)
 {
 	// Scroll the world
-	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
 	//TO-DO USE HANDLE INPUT
 	//FOR NOW JUST GO SIDEWAYS
 	// Move the player sidewards 
@@ -32,13 +32,14 @@ void World::update(sf::Time dt)
 	sf::Vector2f velocity = mPlayer->getVelocity();
 
 	// If player touches borders, flip its X velocity
+	/*
 	if (position.x <= mWorldBounds.left + 150.f
 		|| position.x >= mWorldBounds.left + mWorldBounds.width - 150.f)
 	{
 		velocity.x = -velocity.x;
 		mPlayer->setVelocity(velocity);
 	}
-
+	*/
 	// Apply movements
 	mSceneGraph.update(dt);
 }
@@ -51,9 +52,9 @@ void World::draw()
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::Swordsman, "player.png");
-	mTextures.load(Textures::Mage, "player.png");
-	mTextures.load(Textures::Archer, "player.png");
+	mTextures.load(Textures::Swordsman, "images/player.png");
+	mTextures.load(Textures::Mage, "images/player.png");
+	mTextures.load(Textures::Archer, "images/player.png");
 }
 
 void World::buildScene()
@@ -73,7 +74,7 @@ void World::buildScene()
 	std::unique_ptr<Hero> leader(new Hero(Hero::Swordsman, mTextures));
 	mPlayer = leader.get();
 	mPlayer->setPosition(mSpawnPosition);
-	mPlayer->setVelocity(40.f, mScrollSpeed);
+	mPlayer->setVelocity(0.f, 0.f);
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
 	// Add two mobs
@@ -84,4 +85,8 @@ void World::buildScene()
 	std::unique_ptr<Hero> rightMob(new Hero(Hero::Mage, mTextures));
 	rightMob->setPosition(80.f, 50.f);
 	mPlayer->attachChild(std::move(rightMob));
+}
+
+Hero* World::getHero() const {
+  return mPlayer;
 }

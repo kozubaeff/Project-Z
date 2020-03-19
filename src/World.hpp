@@ -25,6 +25,7 @@ public:
 	explicit World(sf::RenderWindow& window);
 	void update(sf::Time dt);
 	void draw();
+	Hero* getHero() const;
 
 
 private:
@@ -48,11 +49,11 @@ private:
 
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount> mSceneLayers;
+	Hero* mPlayer;
 
 	sf::FloatRect mWorldBounds;
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
-	Hero* mPlayer;
 };
 
 #endif // WORLD_HPP

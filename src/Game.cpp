@@ -7,7 +7,7 @@
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
-	: mWindow(sf::VideoMode(640, 480), "MMORPG", sf::Style::Close)
+	: mWindow(sf::VideoMode(640, 480), "MMORPG")
 	, mWorld(mWindow)
 
 {
@@ -71,7 +71,25 @@ void Game::render()
 }
 
 
-void Game::handlePlayerInput(sf::Keyboard::Key, bool)
+void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
-	//TO-DO
+	if (isPressed) {
+	if (key == sf::Keyboard::Key::Escape) {
+		mWindow.close();
+	}
+	if (key == sf::Keyboard::Key::W) {
+		mWorld.getHero()->setVelocity(0.f, -150.f);
+	}
+	if (key == sf::Keyboard::Key::A) {
+		mWorld.getHero()->setVelocity(-150.f, 0.f);
+	}
+	if (key == sf::Keyboard::Key::S) {
+		mWorld.getHero()->setVelocity(0.f, 150.f);
+	}
+	if(key == sf::Keyboard::Key::D) {
+		mWorld.getHero()->setVelocity(150.f, 0.f);
+	}
+	} else {
+		mWorld.getHero()->setVelocity(0.f, 0.f);
+	}
 }
