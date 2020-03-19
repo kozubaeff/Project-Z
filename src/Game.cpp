@@ -74,21 +74,21 @@ void Game::render()
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
 	if (isPressed) {
-	if (key == sf::Keyboard::Key::Escape) {
-		mWindow.close();
-	}
-	if (key == sf::Keyboard::Key::W) {
-		mWorld.getHero()->setVelocity(0.f, -mPlayerSpeed);
-	}
-	if (key == sf::Keyboard::Key::A) {
-		mWorld.getHero()->setVelocity(-mPlayerSpeed, 0.f);
-	}
-	if (key == sf::Keyboard::Key::S) {
-		mWorld.getHero()->setVelocity(0.f, mPlayerSpeed);
-	}
-	if(key == sf::Keyboard::Key::D) {
-		mWorld.getHero()->setVelocity(mPlayerSpeed, 0.f);
-	}
+		if (key == sf::Keyboard::Key::Escape) {
+			mWindow.close();
+		}
+		if (key == sf::Keyboard::Key::W) {
+			mWorld.getHero()->setVelocity(0.f, -mPlayerSpeed);
+		}
+		if (key == sf::Keyboard::Key::A) {
+			mWorld.getHero()->setVelocity(-mPlayerSpeed, 0.f);
+		}
+		if (key == sf::Keyboard::Key::S) {
+			mWorld.getHero()->setVelocity(0.f, mPlayerSpeed);
+		}
+		if(key == sf::Keyboard::Key::D) {
+			mWorld.getHero()->setVelocity(mPlayerSpeed, 0.f);
+		}
 	} else {
 		mWorld.getHero()->setVelocity(0.f, 0.f);
 	}

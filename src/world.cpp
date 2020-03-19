@@ -24,13 +24,14 @@ World::World(sf::RenderWindow& window)
 
 void World::update(sf::Time dt)
 {
-	// Scroll the world when Player left the rectangle 400 on 320 px
+	// Scroll the world when Player left the rectangle 320 on 240 px
 	// Move the player
 	sf::Vector2f position = mPlayer->getPosition();
 	sf::Vector2f velocity = mPlayer->getVelocity();
 	float movePlayerOnX = velocity.x * dt.asSeconds();
 	float movePlayerOnY = velocity.y * dt.asSeconds();
 
+	//Check player left the rectangle 320 on 240 px
 	if (position.x + movePlayerOnX > mWorldBounds.left + mWorldBounds.width * 3 / 4 || 
 		position.x + movePlayerOnX < mWorldBounds.left + mWorldBounds.width / 4     ||
 		position.y + movePlayerOnY > mWorldBounds.top + mWorldBounds.height * 3 / 4 ||
@@ -48,9 +49,11 @@ void World::update(sf::Time dt)
 
 void World::draw()
 {
+	//Drar a primitive map
 	Map map;
 	map.load();
 	map.draw_map(mWindow);
+
 	mWindow.draw(mSceneGraph);
 }
 
@@ -92,5 +95,5 @@ void World::buildScene()
 }
 
 Hero* World::getHero() const {
-  return mPlayer;
+	return mPlayer;
 }
