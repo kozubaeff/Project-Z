@@ -23,7 +23,8 @@ Hero::Hero(Type type, const TextureHolder& textures)
 	, mSprite(textures.get(toTextureID(type)))
 {
 	sf::FloatRect bounds = mSprite.getLocalBounds();
-	mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+	mSprite.setOrigin(bounds.width, bounds.height);
+	mSprite.setScale(2.0, 2.0);
 }
 
 void Hero::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
