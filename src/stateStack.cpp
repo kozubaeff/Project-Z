@@ -30,3 +30,9 @@ void StateStack::update(sf::Time dt)
     applyPendingChanges();
 
 }
+
+void StateStack::draw()
+{
+    for (State::Ptr& state : mStack)
+        state->draw();
+}
