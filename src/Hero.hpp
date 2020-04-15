@@ -19,6 +19,7 @@ public:
 
 public:
 	Hero(Type type, const TextureHolder& textures);
+    unsigned int	getCategory() const;
 
 private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -26,6 +27,7 @@ private:
 private:
 	Type mType;
 	sf::Sprite mSprite;
+
 };
 
 #endif // HERO_HPP

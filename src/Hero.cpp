@@ -33,3 +33,12 @@ void Hero::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 	//why not simple target.draw(mSprite) ?
 	// see https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderStates.php#details
 }
+
+unsigned int Hero::getCategory() const{
+    switch(mType) {
+        case Swordsman:
+            return Category::Hero;
+        default:
+            return Category::EnemyHero;
+    }
+}
