@@ -23,5 +23,29 @@ Application::Application()
     mStateStack.pushState(States::Game);
 }
 
+void Application::run()
+{
+    sf::Clock clock;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
+    while (mWindow.isOpen())
+    {
+        sf::Time dt = clock.restart();
+        timeSinceLastUpdate += dt;
+        while (timeSinceLastUpdate > TimePerFrame)
+        {
+            timeSinceLastUpdate -= TimePerFrame;
+
+            processInput();
+            update(TimePerFrame);
+
+            // Check inside this loop, because stack might be empty before update() call
+            if (mStateStack.isEmpty())
+                mWindow.close();
+        }
+        render();
+    }
+}
+
 
 
