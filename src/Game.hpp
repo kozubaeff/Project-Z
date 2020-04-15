@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include "World.hpp"
+#include "player.h"
 
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -30,6 +31,7 @@ private:
 
 	sf::RenderWindow mWindow;
 	World mWorld;
+    Player	mPlayer;
 
 };
 

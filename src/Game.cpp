@@ -37,9 +37,13 @@ void Game::run()
 
 void Game::processEvents()
 {
+    CommandQueue& commands = mWorld.getCommandQueue();
+
 	sf::Event event;
+
 	while (mWindow.pollEvent(event))
 	{
+	    mPlayer.handleEvent(event, commands);
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
@@ -55,6 +59,7 @@ void Game::processEvents()
 			break;
 		}
 	}
+	mPlayer.handleRealtimeInput(commands);
 }
 
 void Game::update(sf::Time elapsedTime)
