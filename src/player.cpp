@@ -8,9 +8,8 @@ struct Mover
             : velocity(vx, vy)
     {
     }
-    void operator() (SceneNode& node, sf::Time) const
+    void operator() (Hero& hero, sf::Time) const
     {
-        Hero& hero = static_cast<Hero&>(node);
         hero.setVelocity(velocity + hero.getVelocity());
     }
     sf::Vector2f velocity;
