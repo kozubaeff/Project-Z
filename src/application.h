@@ -21,7 +21,6 @@ private:
     void update(sf::Time dt);
     void render();
 
-    void updateStatistics(sf::Time dt);
     void registerStates();
 
 
@@ -29,6 +28,7 @@ private:
     static const sf::Time TimePerFrame;
 
     sf::RenderWindow mWindow;
+    TextureHolder mTextures;
     Player mPlayer;
 
     StateStack mStateStack;
