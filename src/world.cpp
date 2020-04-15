@@ -32,17 +32,17 @@ void World::update(sf::Time dt)
 	float movePlayerOnY = velocity.y * dt.asSeconds();
 
 	//Check player left the rectangle 320 on 240 px
-	if (position.x + movePlayerOnX > mWorldBounds.left + mWorldBounds.width * 3 / 4 || 
+	if (position.x + movePlayerOnX > mWorldBounds.left + mWorldBounds.width * 3 / 4 ||
 		position.x + movePlayerOnX < mWorldBounds.left + mWorldBounds.width / 4     ||
 		position.y + movePlayerOnY > mWorldBounds.top + mWorldBounds.height * 3 / 4 ||
-		position.y + movePlayerOnY < mWorldBounds.top + mWorldBounds.height / 4) 
+		position.y + movePlayerOnY < mWorldBounds.top + mWorldBounds.height / 4)
 	{
 		mWorldView.move(velocity * dt.asSeconds());
 		mWindow.setView(mWorldView);
 		mWorldBounds.left += velocity.x * dt.asSeconds();
 		mWorldBounds.top += velocity.y * dt.asSeconds();
 	}
-    // Forward commands to scene graph, adapt velocity (scrolling, diagonal correction)
+    // Forward commands to scene graph
     while (!mCommandQueue.isEmpty())
         mSceneGraph.onCommand(mCommandQueue.pop(), dt);
 

@@ -7,13 +7,14 @@
 #include "object.hpp"
 #include "Hero.hpp"
 #include "CommandQueue.h"
+#include "Command.h"
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include <array>
-
+#include <queue>
 
 namespace sf
 {

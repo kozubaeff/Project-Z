@@ -9,7 +9,7 @@ public:
     sf::Texture map;
     sf::Sprite s_map;
 void load() {
-    map_image.loadFromFile("images/grass.png");
+    map_image.loadFromFile("../src/images/grass.png");
     map.loadFromImage(map_image);
     s_map.setTexture(map);
 }
