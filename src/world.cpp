@@ -100,3 +100,7 @@ void World::buildScene()
 Hero* World::getHero() const {
 	return mPlayer;
 }
+
+CommandQueue &World::getCommandQueue() {
+    return mCommandQueue;
+}

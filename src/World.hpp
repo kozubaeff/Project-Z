@@ -28,6 +28,8 @@ public:
 	void draw();
 	Hero* getHero() const;
 
+    CommandQueue& getCommandQueue();
+
 
 private:
 	void loadTextures();
