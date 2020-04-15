@@ -79,3 +79,18 @@ bool StateStack::isEmpty() const
 {
     return mStack.empty();
 }
+
+
+StateStack::PendingChange::PendingChange(Action action, States::ID stateID)
+        : action(action)
+        , stateID(stateID)
+{
+}
+
+StateStack::StateStack(State::Context context)
+        : mStack()
+        , mPendingList()
+        , mContext(context)
+        , mFactories()
+{
+}
