@@ -36,3 +36,26 @@ void StateStack::draw()
     for (State::Ptr& state : mStack)
         state->draw();
 }
+
+
+void StateStack::applyPendingChanges()
+{
+    for(PendingChange change : mPendingList)
+    {
+        switch (change.action)
+        {
+            case Push:
+                mStack.push_back(createState(change.stateID));
+                break;
+
+            case Pop:
+                mStack.pop_back();
+                break;
+
+            case Clear:
+                mStack.clear();
+                break;
+        }
+    }
+    mPendingList.clear();
+}
