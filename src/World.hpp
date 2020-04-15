@@ -6,6 +6,7 @@
 #include "SceneNode.hpp"
 #include "object.hpp"
 #include "Hero.hpp"
+#include "CommandQueue.h"
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -49,6 +50,7 @@ private:
 
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount> mSceneLayers;
+    CommandQueue mCommandQueue;
 	Hero* mPlayer;
 
 	sf::FloatRect mWorldBounds;
