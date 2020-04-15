@@ -42,6 +42,9 @@ void World::update(sf::Time dt)
 		mWorldBounds.left += velocity.x * dt.asSeconds();
 		mWorldBounds.top += velocity.y * dt.asSeconds();
 	}
+    // Forward commands to scene graph, adapt velocity (scrolling, diagonal correction)
+    while (!mCommandQueue.isEmpty())
+        mSceneGraph.onCommand(mCommandQueue.pop(), dt);
 
 	// Apply movements
 	mSceneGraph.update(dt);
