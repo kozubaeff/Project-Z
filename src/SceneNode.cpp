@@ -79,3 +79,7 @@ sf::Transform SceneNode::getWorldTransform() const
 
 	return transform;
 }
+
+unsigned int SceneNode::getCategory() const {
+    return Category::Scene;
+}
