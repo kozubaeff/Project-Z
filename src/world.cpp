@@ -2,7 +2,7 @@
 #include "map.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
-
+#include <math.h>
 
 World::World(sf::RenderWindow& window)
 	: mWindow(window)
@@ -43,9 +43,13 @@ void World::update(sf::Time dt)
 		mWorldBounds.top += velocity.y * dt.asSeconds();
 	}
     // Forward commands to scene graph
+    mPlayer->setVelocity(0.f, 0.f);
     while (!mCommandQueue.isEmpty())
         mSceneGraph.onCommand(mCommandQueue.pop(), dt);
 
+    velocity = mPlayer->getVelocity();
+    if (velocity.x != 0.f && velocity.y != 0.f)
+        mPlayer->setVelocity(velocity / std::sqrt(2.f));
 	// Apply movements
 	mSceneGraph.update(dt);
 }

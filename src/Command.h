@@ -3,7 +3,9 @@
 
 #include <SFML/System/Time.hpp>
 #include "Category.h"
+
 #include <functional>
+#include <cassert>
 
 class SceneNode;
 struct Command {
