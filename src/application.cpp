@@ -47,5 +47,32 @@ void Application::run()
     }
 }
 
+void Application::processInput()
+{
+    sf::Event event;
+    while (mWindow.pollEvent(event))
+    {
+        mStateStack.handleEvent(event);
+
+        if (event.type == sf::Event::Closed || event.key.code == sf::Keyboard::Key::Escape)
+            mWindow.close();
+    }
+}
+
+void Application::update(sf::Time dt)
+{
+    mStateStack.update(dt);
+}
+
+void Application::render()
+{
+    mWindow.clear();
+
+    mStateStack.draw();
+
+    mWindow.setView(mWindow.getDefaultView());
+
+    mWindow.display();
+}
 
 
