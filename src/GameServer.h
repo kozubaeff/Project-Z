@@ -27,6 +27,18 @@ private:
     void tick();
 
 private:
+    struct RemotePeer
+    {
+        RemotePeer();
+        sf::TcpSocket socket;
+        sf::Time lastPacketTime;
+        std::vector<sf::Int32>	heroIdentifiers;
+        bool ready;
+        bool timedOut;
+    };
+    // Unique pointer to remote peers
+    typedef std::unique_ptr<RemotePeer> PeerPtr;
+private:
     sf::Thread mThread;
     sf::Clock mClock;
     sf::TcpListener	mListenerSocket;
@@ -39,6 +51,9 @@ private:
     float mWorldHeight;
     sf::FloatRect mBattleFieldRect;
     float mBattleFieldScrollSpeed;
+
+    std::vector<PeerPtr> mPeers;
+
 };
 
 
