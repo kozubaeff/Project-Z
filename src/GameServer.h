@@ -25,6 +25,8 @@ private:
     void handleDisconnections();
     void executionThread();
     void tick();
+    void inform(sf::TcpSocket& socket);
+    sf::Time getCurrentTime() const;
 
 private:
     struct RemotePeer
@@ -46,22 +48,28 @@ private:
     // Unique pointer to remote peers
     typedef std::unique_ptr<RemotePeer> PeerPtr;
 private:
-    sf::Thread mThread;
-    sf::Clock mClock;
-    sf::TcpListener	mListenerSocket;
-    bool mListeningState;
-    sf::Time mClientTimeoutTime;
+    sf::Thread thread;
+    sf::Clock clock;
+    sf::TcpListener	listenerSocket;
+    bool listeningState;
+    sf::Time clientTimeoutTime;
 
-    std::size_t	mMaxConnectedPlayers;
-    std::size_t	mConnectedPlayers;
+    std::size_t	maxConnectedPlayers;
+    std::size_t	connectedPlayers;
 
-    float mWorldHeight;
-    sf::FloatRect mBattleFieldRect;
-    float mBattleFieldScrollSpeed;
+    float worldHeight;
+    sf::FloatRect battleFieldRect;
+    float battleFieldScrollSpeed;
 
-    std::vector<PeerPtr> mPeers;
-    std::size_t mHeroCount;
-    std::map<sf::Int32, HeroInfo> mHeroInfo;
+    std::vector<PeerPtr> peers;
+    //num of real peers plus one!
+    //why ?  sf::TcpListener::accept() requires it
+    std::size_t heroCount;
+    std::map<sf::Int32, HeroInfo> heroInfo;
+
+    sf::Int32	heroIdentifierCounter;
+    // increases when new hero spawns , for different id's
+
 
 };
 
