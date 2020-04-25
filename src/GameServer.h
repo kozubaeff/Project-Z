@@ -36,6 +36,13 @@ private:
         bool ready;
         bool timedOut;
     };
+    struct HeroInfo
+    {
+        sf::Vector2f position;
+        sf::Int32 hitpoints;
+        // healing per second, ammo etc.
+        std::map<sf::Int32, bool> realtimeActions;
+    };
     // Unique pointer to remote peers
     typedef std::unique_ptr<RemotePeer> PeerPtr;
 private:
@@ -53,6 +60,8 @@ private:
     float mBattleFieldScrollSpeed;
 
     std::vector<PeerPtr> mPeers;
+    std::size_t mHeroCount;
+    std::map<sf::Int32, HeroInfo> mHeroInfo;
 
 };
 
