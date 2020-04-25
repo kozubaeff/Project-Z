@@ -24,34 +24,41 @@ World::World(sf::RenderWindow& window)
 
 void World::update(sf::Time dt)
 {
-	// Scroll the world when Player left the rectangle 320 on 240 px
-	// Move the player
-	sf::Vector2f position = mPlayer->getPosition();
-	sf::Vector2f velocity = mPlayer->getVelocity();
-	float movePlayerOnX = velocity.x * dt.asSeconds();
-	float movePlayerOnY = velocity.y * dt.asSeconds();
 
-	//Check player left the rectangle 320 on 240 px
-	if (position.x + movePlayerOnX > mWorldBounds.left + mWorldBounds.width * 3 / 4 ||
-		position.x + movePlayerOnX < mWorldBounds.left + mWorldBounds.width / 4     ||
-		position.y + movePlayerOnY > mWorldBounds.top + mWorldBounds.height * 3 / 4 ||
-		position.y + movePlayerOnY < mWorldBounds.top + mWorldBounds.height / 4)
-	{
-		mWorldView.move(velocity * dt.asSeconds());
-		mWindow.setView(mWorldView);
-		mWorldBounds.left += velocity.x * dt.asSeconds();
-		mWorldBounds.top += velocity.y * dt.asSeconds();
-	}
     // Forward commands to scene graph
     mPlayer->setVelocity(0.f, 0.f);
-    while (!mCommandQueue.isEmpty())
+    while (!mCommandQueue.isEmpty()) {
         mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+    }
 
-    velocity = mPlayer->getVelocity();
-    if (velocity.x != 0.f && velocity.y != 0.f)
+
+    sf::Vector2f velocity = mPlayer->getVelocity();
+    if (velocity.x != 0.f && velocity.y != 0.f) {
         mPlayer->setVelocity(velocity / std::sqrt(2.f));
-	// Apply movements
+    }
+
+    sf::Vector2f position = mPlayer->getPosition();
+    velocity = mPlayer->getVelocity();
+    float movePlayerOnX = velocity.x * dt.asSeconds();
+    float movePlayerOnY = velocity.y * dt.asSeconds();
+
+    if (position.x + movePlayerOnX > mWorldBounds.left + mWorldBounds.width * 3 / 4 ||
+        position.x + movePlayerOnX < mWorldBounds.left + mWorldBounds.width / 4     ||
+        position.y + movePlayerOnY > mWorldBounds.top + mWorldBounds.height * 3 / 4 ||
+        position.y + movePlayerOnY < mWorldBounds.top + mWorldBounds.height / 4)
+    {
+        mWorldView.move(velocity * dt.asSeconds());
+        mWindow.setView(mWorldView);
+        mWorldBounds.left += velocity.x * dt.asSeconds();
+        mWorldBounds.top += velocity.y * dt.asSeconds();
+    }
+
+
+    // Apply movements
 	mSceneGraph.update(dt);
+
+
+
 }
 
 void World::draw()
@@ -101,7 +108,7 @@ void World::buildScene()
 	mPlayer->attachChild(std::move(rightMob));
 }
 
-Hero* World::getHero() const {
+const Hero* World::getHero() const {
 	return mPlayer;
 }
 

@@ -70,8 +70,6 @@ void Application::render()
 
     mStateStack.draw();
 
-    mWindow.setView(mWindow.getDefaultView());
-
     mWindow.display();
 }
 

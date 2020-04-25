@@ -27,7 +27,7 @@ public:
 	explicit World(sf::RenderWindow& window);
 	void update(sf::Time dt);
 	void draw();
-	Hero* getHero() const;
+	const Hero* getHero() const;
 
     CommandQueue& getCommandQueue();
 
