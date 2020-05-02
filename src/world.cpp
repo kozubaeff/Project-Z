@@ -1,5 +1,4 @@
 #include "World.hpp"
-#include "map.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <math.h>
@@ -18,6 +17,9 @@ World::World(sf::RenderWindow& window)
 	loadTextures();
 	buildScene();
 
+	mMap = new Map(mWindow);
+	mMap->load("map.tmx", "images/Slates.png");
+	
 	// Prepare the view
 	mWorldView.setCenter(mSpawnPosition);
 }
@@ -64,9 +66,7 @@ void World::update(sf::Time dt)
 void World::draw()
 {
 	//Drar a primitive map
-	Map mMap(mWindow);
-	mMap.load("map.tmx", "images/Slates.png");
-	mMap.draw();
+	mMap->draw();
 
 	mWindow.draw(mSceneGraph);
 }

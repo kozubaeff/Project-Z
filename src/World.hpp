@@ -8,6 +8,7 @@
 #include "Hero.hpp"
 #include "CommandQueue.h"
 #include "Command.h"
+#include "map.h"
 
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -59,6 +60,8 @@ private:
 	sf::FloatRect mWorldBounds;
 	sf::Vector2f mSpawnPosition;
 	float mScrollSpeed;
+
+	Map* mMap;
 };
 
 #endif // WORLD_HPP
