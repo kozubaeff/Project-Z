@@ -14,8 +14,13 @@ Textures::ID toTextureID(Hero::Type type)
 
 	case Hero::Archer:
 		return Textures::Archer;
+
+	case Hero::Mage:
+	    return Textures::Mage;
 	}
-	return Textures::Mage;
+
+
+
 }
 
 Hero::Hero(Type type, const TextureHolder& textures)
