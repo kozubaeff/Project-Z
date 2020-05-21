@@ -1,5 +1,4 @@
 #include "World.hpp"
-#include "map.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <math.h>
@@ -18,6 +17,9 @@ World::World(sf::RenderWindow& window)
 	loadTextures();
 	buildScene();
 
+	mMap = new Map(mWindow);
+	mMap->load("map.tmx", "images/Slates.png");
+	
 	// Prepare the view
 	mWorldView.setCenter(mSpawnPosition);
 }
@@ -64,9 +66,7 @@ void World::update(sf::Time dt)
 void World::draw()
 {
 	//Drar a primitive map
-	Map map;
-	map.load();
-	map.draw_map(mWindow);
+	mMap->draw();
 
 	mWindow.draw(mSceneGraph);
 }
@@ -99,13 +99,13 @@ void World::buildScene()
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
 	// Add two mobs
-	std::unique_ptr<Hero> leftMob(new Hero(Hero::Archer, mTextures));
-	leftMob->setPosition(-80.f, 50.f);
-	mPlayer->attachChild(std::move(leftMob));
+	// std::unique_ptr<Hero> leftMob(new Hero(Hero::Archer, mTextures));
+	// leftMob->setPosition(-80.f, 50.f);
+	// mPlayer->attachChild(std::move(leftMob));
 
-	std::unique_ptr<Hero> rightMob(new Hero(Hero::Mage, mTextures));
-	rightMob->setPosition(80.f, 50.f);
-	mPlayer->attachChild(std::move(rightMob));
+	// std::unique_ptr<Hero> rightMob(new Hero(Hero::Mage, mTextures));
+	// rightMob->setPosition(80.f, 50.f);
+	// mPlayer->attachChild(std::move(rightMob));
 }
 
 const Hero* World::getHero() const {

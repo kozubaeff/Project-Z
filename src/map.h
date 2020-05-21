@@ -1,130 +1,31 @@
-#include <SFML/Graphics.hpp>
+#ifndef MAP_H
+#define MAP_H 
 
-const int MAP_HEIGHT = 100;
-const int MAP_WIDTH = 100;
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <SFML/Graphics.hpp>
+#include <tinyxml.h>
 
 class Map {
 public:
-    sf::Image map_image;
-    sf::Texture map;
-    sf::Sprite s_map;
-void load() {
-    map_image.loadFromFile("../src/images/grass.png");
-    map.loadFromImage(map_image);
-    s_map.setTexture(map);
-}
+	Map(sf::RenderWindow& window) : mWindow(window) {};
 
-sf::String WORLD_MAP[MAP_HEIGHT] = {
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                           xxxxxxxxx                                                                ",
-    "                           x       x                                                                ",
-    "                                   x                                                                ",
-    "                                   x                                                                ",
-    "                           x       x                                                                ",
-    "                           xxxxxxxxx                                                                ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
-    "                                                                                                    ",
+	void load(std::string, std::string);
+	void draw();
+
+private:
+	std::string mapName, imageName;
+
+	int width, height, tileWidth, tileHeight;
+	int firstTileID;
+
+	std::unordered_map<int, sf::Sprite> sprites;
+	std::vector<sf::Sprite> allSprites;
+
+	sf::Texture tilesetImage;
+	sf::RenderWindow& mWindow;
+
 };
 
-void draw_map(sf::RenderWindow &window){
-    for (int i = 0; i < MAP_HEIGHT; i++)
-		for (int j = 0; j < MAP_WIDTH; j++)
-		{
-			if (WORLD_MAP[i][j] == ' ')  s_map.setTextureRect(sf::IntRect(0, 0, 32, 32));
-			if (WORLD_MAP[i][j] == 'X')  s_map.setTextureRect(sf::IntRect(0, 0, 32, 32));
-			s_map.setPosition(j * 32, i * 32);
-			window.draw(s_map);
-		}
-    }
-};
+#endif
