@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_map>
 #include <SFML/Graphics.hpp>
-#include <tinyxml.h>
+#include <tinyxml/tinyxml.h>
 
 class Map {
 public:

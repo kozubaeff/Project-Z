@@ -58,8 +58,8 @@ private:
 	Hero* mPlayer;
 
 	sf::FloatRect mWorldBounds;
+	sf::FloatRect mCameraBounds;
 	sf::Vector2f mSpawnPosition;
-	float mScrollSpeed;
 
 	Map* mMap;
 };

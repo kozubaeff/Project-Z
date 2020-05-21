@@ -15,12 +15,14 @@ class Application
 {
 public :
     Application();
+
     void run();
 private:
     void processInput();
     void update(sf::Time dt);
     void render();
 
+    void updateStatistics(sf::Time dt);
     void registerStates();
 
 
@@ -29,9 +31,14 @@ private:
 
     sf::RenderWindow mWindow;
     TextureHolder mTextures;
+    FontHolder mFonts;
     Player mPlayer;
 
     StateStack mStateStack;
+
+    sf::Text mStatisticsText;
+    sf::Time mStatisticsUpdateTime;
+    std::size_t mStatisticsNumFrames;
 };
 
 #endif //THEGAME_APPLICATION_H

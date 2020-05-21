@@ -1,9 +1,11 @@
 #include "map.h"
 
+#include <utility>
+
 void Map::load(std::string sourceMap, std::string pathTileset)
 {
-	mapName = sourceMap;
-	imageName = pathTileset;
+	mapName = std::move(sourceMap);
+	imageName = std::move(pathTileset);
 
 	//Load map file
 	TiXmlDocument mapFile(mapName.c_str());
@@ -24,7 +26,7 @@ void Map::load(std::string sourceMap, std::string pathTileset)
 
 	//Load image
 	sf::Image pngImage;
-	pngImage.loadFromFile("images/Slates.png");
+	pngImage.loadFromFile(imageName);
 	tilesetImage.loadFromImage(pngImage);
 
 	//To each ID tile add a range of tile in source image
