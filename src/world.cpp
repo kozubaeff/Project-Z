@@ -3,24 +3,23 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <math.h>
 
-World::World(sf::RenderWindow& window)
+World::World(sf::RenderWindow& window, FontHolder& fonts)
 
 	: mWindow(window)
 	, mWorldView(sf::FloatRect (0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mTextures()
+	, mFonts(fonts)
 	, mSceneGraph()
 	, mSceneLayers()
 	, mPlayer(nullptr)
-	, mWorldBounds(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y) //change here
-	, mCameraBounds(0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y)
+	, mWorldBounds(0.f, 0.f, 1000, 1000) //change here
+	, mCameraBounds(sf::FloatRect (0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mSpawnPosition((mCameraBounds.left + mCameraBounds.width) / 2.f, (mCameraBounds.top + mCameraBounds.height )/ 2.f)
 
 {
 	loadTextures();
 	buildScene();
 
-	mMap = new Map(mWindow);
-	mMap->load("../src/map.tmx", "../src/images/Slates.png");
 
 	
 	// Prepare the view
@@ -53,16 +52,16 @@ void World::update(sf::Time dt)
         position.y + movePlayerOnY > mCameraBounds.top + mCameraBounds.height * 3 / 4 ||
         position.y + movePlayerOnY < mCameraBounds.top + mCameraBounds.height / 4)
     {
-        if(mCameraBounds.left + movePlayerOnX - borderDist>= 0 &&
-        mCameraBounds.left + mCameraBounds.width + movePlayerOnX  + borderDist<= mWorldBounds.width
-        && mCameraBounds.top + movePlayerOnY - borderDist >= 0 &&
-           mCameraBounds.top + mCameraBounds.height + movePlayerOnY  + borderDist<= mWorldBounds.top + mWorldBounds.height) {
+//        if(mCameraBounds.left + movePlayerOnX - borderDist>= 0 &&
+//        mCameraBounds.left + mCameraBounds.width + movePlayerOnX  + borderDist<= mWorldBounds.width
+//        && mCameraBounds.top + movePlayerOnY - borderDist >= 0 &&
+//           mCameraBounds.top + mCameraBounds.height + movePlayerOnY  + borderDist<= mWorldBounds.top + mWorldBounds.height) {
 
             mWorldView.move(velocity * dt.asSeconds());
             mWindow.setView(mWorldView);
             mCameraBounds.left += velocity.x * dt.asSeconds();
             mCameraBounds.top += velocity.y * dt.asSeconds();
-        }
+    //    }
 
 
     }
@@ -117,12 +116,15 @@ void World::buildScene()
 	
 
 	// Add player
-	std::unique_ptr<Hero> leader(new Hero(Hero::Swordsman, mTextures));
+	std::unique_ptr<Hero> leader(new Hero(Hero::Swordsman, mTextures, mFonts));
 	mPlayer = leader.get();
 	mPlayer->setPosition(mSpawnPosition);
 	mPlayer->setVelocity(0.f, 0.f);
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
+
+    mMap = new Map(mWindow);
+    mMap->load("../src/map.tmx", "../src/images/Slates.png");
 	// Add two mobs
 	// std::unique_ptr<Hero> leftMob(new Hero(Hero::Archer, mTextures));
 	// leftMob->setPosition(-80.f, 50.f);

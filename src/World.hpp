@@ -25,7 +25,7 @@ namespace sf
 class World : private sf::NonCopyable
 {
 public:
-	explicit World(sf::RenderWindow& window);
+	explicit World(sf::RenderWindow& window, FontHolder& fonts);
 	void update(sf::Time dt);
 	void draw();
 	const Hero* getHero() const;
@@ -46,11 +46,25 @@ private:
 		LayerCount
 	};
 
+    struct SpawnPoint
+    {
+        SpawnPoint(Hero::Type type, float x, float y)
+                : type(type)
+                , x(x)
+                , y(y)
+        {
+        }
+
+        Hero::Type type;
+        float x;
+        float y;
+    };
 
 private:
 	sf::RenderWindow& mWindow;
 	sf::View mWorldView;
 	TextureHolder mTextures;
+    FontHolder&	mFonts;
 
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount> mSceneLayers;
@@ -62,6 +76,8 @@ private:
 	sf::Vector2f mSpawnPosition;
 
 	Map* mMap;
+
+    std::vector<SpawnPoint>	mEnemySpawnPoints;
 };
 
 #endif // WORLD_HPP

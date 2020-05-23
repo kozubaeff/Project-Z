@@ -1,6 +1,6 @@
 #include "loadingState.h"
 #include "ResourceHolder.hpp"
-
+#include "utility.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/View.hpp>

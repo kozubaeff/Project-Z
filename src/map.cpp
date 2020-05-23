@@ -2,6 +2,7 @@
 
 #include <utility>
 
+
 void Map::load(std::string sourceMap, std::string pathTileset)
 {
 	mapName = std::move(sourceMap);
@@ -20,10 +21,9 @@ void Map::load(std::string sourceMap, std::string pathTileset)
  
 	//Read the size of map and the size of tile
 	width = atoi(map->Attribute("width"));
-	height = atoi(map->Attribute("height")); 
+	height = atoi(map->Attribute("height"));
 	tileWidth = atoi(map->Attribute("tilewidth"));
 	tileHeight = atoi(map->Attribute("tileheight"));
-
 	//Load image
 	sf::Image pngImage;
 	pngImage.loadFromFile(imageName);
