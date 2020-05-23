@@ -1,10 +1,11 @@
 #include "World.hpp"
+#include "TextNode.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <math.h>
+#include <cmath>
+
 
 World::World(sf::RenderWindow& window, FontHolder& fonts)
-
 	: mWindow(window)
 	, mWorldView(sf::FloatRect (0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
 	, mTextures()
@@ -13,10 +14,10 @@ World::World(sf::RenderWindow& window, FontHolder& fonts)
 	, mSceneLayers()
 	, mPlayer(nullptr)
 	, mWorldBounds(0.f, 0.f, 1000, 1000) //change here
-	, mCameraBounds(sf::FloatRect (0.f, 0.f, mWindow.getSize().x, mWindow.getSize().y))
-	, mSpawnPosition((mCameraBounds.left + mCameraBounds.width) / 2.f, (mCameraBounds.top + mCameraBounds.height )/ 2.f)
+	, mSpawnPosition(mWindow.getSize().x / 2.f, mWindow.getSize().y / 2.f)
 
 {
+    mWindow.setView(mWorldView);
 	loadTextures();
 	buildScene();
 
@@ -41,45 +42,23 @@ void World::update(sf::Time dt)
         mPlayer->setVelocity(velocity / std::sqrt(2.f));
     }
 
-    const float borderDist = 80.f;
+    const float borderDistX = mWindow.getSize().x / 2.f + 50;
+    const float borderDistY = mWindow.getSize().y / 2.f + 50;
     sf::Vector2f position = mPlayer->getPosition();
-    velocity = mPlayer->getVelocity();
-    float movePlayerOnX = velocity.x * dt.asSeconds();
-    float movePlayerOnY = velocity.y * dt.asSeconds();
-
-    if (position.x + movePlayerOnX > mCameraBounds.left + mCameraBounds.width * 3 / 4 ||
-        position.x + movePlayerOnX < mCameraBounds.left + mCameraBounds.width / 4     ||
-        position.y + movePlayerOnY > mCameraBounds.top + mCameraBounds.height * 3 / 4 ||
-        position.y + movePlayerOnY < mCameraBounds.top + mCameraBounds.height / 4)
-    {
-//        if(mCameraBounds.left + movePlayerOnX - borderDist>= 0 &&
-//        mCameraBounds.left + mCameraBounds.width + movePlayerOnX  + borderDist<= mWorldBounds.width
-//        && mCameraBounds.top + movePlayerOnY - borderDist >= 0 &&
-//           mCameraBounds.top + mCameraBounds.height + movePlayerOnY  + borderDist<= mWorldBounds.top + mWorldBounds.height) {
-
-            mWorldView.move(velocity * dt.asSeconds());
-            mWindow.setView(mWorldView);
-            mCameraBounds.left += velocity.x * dt.asSeconds();
-            mCameraBounds.top += velocity.y * dt.asSeconds();
-    //    }
 
 
-    }
-
-
-
-
-
-    position.x = std::max(position.x,
-                          borderDist);
-    position.x = std::min(position.x, mWorldBounds.width - borderDist);
-    position.y = std::max(position.y,
-                             borderDist);
-    position.y = std::min(position.y, mWorldBounds.height  - borderDist);
+    position.x = std::max(position.x, borderDistX);
+    position.x = std::min(position.x, mWorldBounds.width - borderDistX);
+    position.y = std::max(position.y, borderDistY);
+    position.y = std::min(position.y, mWorldBounds.height - borderDistY);
 
 
 
     mPlayer->setPosition(position);
+
+    sf::Vector2f movement = mPlayer->getPosition() - mWorldView.getCenter();
+    mWorldView.move(movement * dt.asSeconds());
+    mWindow.setView(mWorldView);
     // Apply movements
 	mSceneGraph.update(dt);
 

@@ -30,6 +30,10 @@ public:
 	void draw();
 	const Hero* getHero() const;
 
+
+    bool hasAlivePlayer() const;
+    bool hasPlayerReachedEnd() const;
+
     CommandQueue& getCommandQueue();
 
 
@@ -37,6 +41,17 @@ private:
 	void loadTextures();
 	void buildScene();
 
+    void adaptPlayerPosition();
+    void adaptPlayerVelocity();
+    void handleCollisions();
+    void addEnemies();
+    void addEnemy(Hero::Type type, float relX, float relY);
+    void spawnEnemies();
+    void destroyEntitiesOutsideView();
+    void guideMissiles();
+
+    sf::FloatRect getViewBounds() const;
+    sf::FloatRect getBattlefieldBounds() const;
 
 private:
 	enum Layer
@@ -72,12 +87,13 @@ private:
 	Hero* mPlayer;
 
 	sf::FloatRect mWorldBounds;
-	sf::FloatRect mCameraBounds;
 	sf::Vector2f mSpawnPosition;
+
 
 	Map* mMap;
 
     std::vector<SpawnPoint>	mEnemySpawnPoints;
+    std::vector<Hero*>	mActiveEnemies;
 };
 
 #endif // WORLD_HPP
