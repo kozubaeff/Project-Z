@@ -9,6 +9,7 @@
 MenuState::MenuState(StateStack& stack, Context context)
         : State(stack, context)
         , mGUIContainer()
+        , firstEvent(true)
 {
     sf::Texture& texture = context.textures->get(Textures::TitleScreen);
     mBackgroundSprite.setTexture(texture);
@@ -63,6 +64,10 @@ bool MenuState::update(sf::Time)
 
 bool MenuState::handleEvent(const sf::Event& event)
 {
-    mGUIContainer.handleEvent(event);
+    if(firstEvent) {
+        firstEvent = false;
+    }else {
+        mGUIContainer.handleEvent(event);
+    }
     return false;
 }

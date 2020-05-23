@@ -1,7 +1,7 @@
 #include "stateStack.h"
 
 #include <cassert>
-
+#include <iostream>
 State::Ptr StateStack::createState(States::ID stateID)
 {
     auto found = mFactories.find(stateID);
@@ -12,8 +12,10 @@ State::Ptr StateStack::createState(States::ID stateID)
 
 void StateStack::handleEvent(const sf::Event &event)
 {
+    std::cout << mStack.size() << '\n';
     for (auto itr = mStack.rbegin(); itr != mStack.rend(); itr++)
     {
+
         if (!(*itr)->handleEvent(event))
             return;
     }

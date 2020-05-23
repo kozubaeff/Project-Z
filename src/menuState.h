@@ -20,5 +20,6 @@ public:
 private:
     sf::Sprite mBackgroundSprite;
     GUI::Container mGUIContainer;
+    bool firstEvent; // stupid bugfix
 };
 #endif //THEGAME_MENUSTATE_H
