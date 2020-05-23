@@ -2,6 +2,7 @@
 #define THEGAME_MENUSTATE_H
 
 #include "state.h"
+#include "container.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
 
@@ -15,21 +16,9 @@ public:
     virtual bool update(sf::Time dt);
     virtual bool handleEvent(const sf::Event& event);
 
-    void updateOptionText();
-
-
-private:
-    enum OptionNames
-    {
-        Play,
-        Exit,
-    };
-
 
 private:
     sf::Sprite mBackgroundSprite;
-
-    std::vector<sf::Text> mOptions;
-    std::size_t	mOptionIndex;
+    GUI::Container mGUIContainer;
 };
 #endif //THEGAME_MENUSTATE_H

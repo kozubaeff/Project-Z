@@ -14,7 +14,10 @@ namespace Textures
 		Archer,
 		Swordsman,
 		Mage,
-		TitleScreen
+		TitleScreen,
+		ButtonNormal,
+		ButtonSelected,
+		ButtonPressed
 	};
 }
 namespace Fonts
