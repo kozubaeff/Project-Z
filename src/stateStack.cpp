@@ -1,7 +1,6 @@
 #include "stateStack.h"
 
 #include <cassert>
-#include <iostream>
 State::Ptr StateStack::createState(States::ID stateID)
 {
     auto found = mFactories.find(stateID);
@@ -12,7 +11,6 @@ State::Ptr StateStack::createState(States::ID stateID)
 
 void StateStack::handleEvent(const sf::Event &event)
 {
-    std::cout << mStack.size() << '\n';
     for (auto itr = mStack.rbegin(); itr != mStack.rend(); itr++)
     {
 
@@ -64,17 +62,17 @@ void StateStack::applyPendingChanges()
 
 void StateStack::pushState(States::ID stateID)
 {
-    mPendingList.push_back(PendingChange(Push, stateID));
+    mPendingList.emplace_back(Push, stateID);
 }
 
 void StateStack::popState()
 {
-    mPendingList.push_back(PendingChange(Pop));
+    mPendingList.emplace_back(Pop);
 }
 
 void StateStack::clearStates()
 {
-    mPendingList.push_back(PendingChange(Clear));
+    mPendingList.emplace_back(Clear);
 }
 
 bool StateStack::isEmpty() const
